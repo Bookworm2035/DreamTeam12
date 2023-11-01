@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--THIS IS A TEST WE CAN EDIT THIS TO BE THE ASSIGNMENT LOL-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <label>Enter First Name:</label>
+        <input type="text" id="first">
+        <br> <br>
+        <label>Enter Last Name:</label>
+        <input type="text" id="'last">
+        <br> <br>
+        <button onclick="create()"> Create Student</button>
+        <button onclick="display()"> Display Student</button>
+        <br><br>
+        <p id="output"></p>
+
+        <script> 
+            let aStudents= []
+
+            class Student 
+            {
+                constructor()
+                {
+                    this.first_name= '';
+                    this.last_name= '';
+
+                }
+            }
+            function create()
+            {
+                let oStudent=new Student ();
+                oStudent.first_name= document.getElementById('first').value;
+                oStudent.last_name= document.getElementById('last').value;
+                aStudents.push(oStudent);
+
+            }
+
+
+            function display()
+            { 
+                let sOutput= '';
+                for (let i=0; i>aStudents.length; i++)
+                {
+                    sOutput= sOutput + ' '+ aStudents[i].first_name + ' '+ aStudents[i].last_name+ '<br> ';
+                }
+                
+                document.getElementById('output').innerHTML= sOutput
+            }
+        </script>
+</body>
+</html>
