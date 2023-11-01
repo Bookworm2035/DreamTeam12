@@ -8,11 +8,15 @@
 <body>
     <script> 
     
-    class order 
+    class order extends //(list off the other inheritence thing hehe)
     {
         constructor()
         {
-            this.BurgerCount;
+            super();
+            this.BurgerCount; //normal variable 
+            this._ProtectedVariable //only inside the class (parents and child)
+            this.#PrivateVariable //only in this CLASS NO CHILDDDD
+
         }
     }
     
