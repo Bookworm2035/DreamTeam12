@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!--Section 04 Group 12
+    Hayden is the GOAT master coder and could hack into the pentagon to steal the Declaration of Independence
+Nya, Hayden, Natali 
+Description: This is a program that..... ADD THIS LATER PLS
+
+
+Notes 
+this._ProtectedVariable //only inside the class (parents and child)
+this.#PrivateVariable //only in this CLASS NO CHILDDDD
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures</title>
+</head>
+<body>
+    <button onclick="letHimCook()"> Let him cook! </button>
+    <p id="dinnerisserved"> </p>
+
+    <script> 
+    let asCustomers = ["Jefe", "El Guapo", "Lucky Day", "Ned Nederlander", "Dusty Bottoms", "Harry Flugleman", "Carmen", "Invisible Swordsman", "Singing Bush"];
+    let aQueue= [];
+    let sOutput= '';
+    let sQuantity='';
+    let sOutputPad='';
+
+    class Order //(list off the other inheritence thing hehe)
+    {
+        constructor()
+        {
+            this.burger_count = this.randomBurgers(); //normal variable 
+            //assign the random_burger value to the burger_count instance variable 
+            
+        }
+
+        randomBurgers ()    
+        {
+            let randBurger = Math.floor(Math.random() * 20) + 1;
+            return randBurger;
+        }
+    }
+
+    class Person 
+    {
+        constructor()
+        {
+            this.customer_name = this.randomName();
+        }
+
+
+        randomName()
+        {
+            let iNameNum= Math.floor(Math.random()*10);
+            let sName= asCustomers[iNameNum];
+            return sName;
+        }
+    }
+
+    class Customer extends Person
+    {
+        constructor()
+        {
+            super();
+            this.order = new Order()
+        }
+    }
+    //assign it items of type CUSTOMER
+    aQueue = []
+
+function letHimCook()
+{
+    //For loop for 100 instances of customers 
+    for (let i = 0; i <= 99; i++)
+    {
+        let oCustomer = new Customer();
+        let oOrder= new Order();
+        //idk if this will work to push so we might need to change it
+        
+        aQueue.push[[oCustomer][oOrder]];
+        //aQueue.push([oCustomer]);
+        
+        //possible way to push to nested array could break everything lol 
+        // aQueue[i]=oCustomer;
+        // aQueue[i][1]=oOrder;
+    }
+
+    let CustomerOrders = [] // Needs to be a nested array
+    let iCount = 0
+    while (aQueue.length > 0) 
+    {
+        const customer = aQueue.shift();
+        const customerName = customer.customer_name;
+        const burgerCount = customer.order.burger_count;
+
+        let customerExists = false;
+
+        for (let j = 0; j < CustomerOrders.length; j++) {
+            if (CustomerOrders[j][0] === customerName) {
+                CustomerOrders[j][1] += burgerCount;
+                customerExists = true;
+            }
+        }
+
+        if (!customerExists) {
+            CustomerOrders.push([customerName, burgerCount]);
+        }
+    }
+    // while (aQueue.length !== 0)
+    // {
+
+    //     if (CustomerOrders[0][0] == "Jefe" && aQueue[0][0] = 'Jefe')
+    //     {
+    //         CustomerOrders[0][1].burger_count += burger_count;
+    //     }
+    //     if (aQueue[iCount][0] == 'Jefe')
+    //     { 
+    //         CustomerOrders[iCountC][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCountC][0] == 'El Guapo')
+    //     { 
+    //         CustomerOrders[iCountC][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Lucky Day')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Ned Nederlander')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count;
+    //         iCount++; 
+    //     }
+    //     else if(aQueue[iCount][0] == 'Dusty Bottoms')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Harry Flugleman')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Carmen')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Invisible Swordsman')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else if(aQueue[iCount][0] == 'Singing Bush')
+    //     {
+    //         CustomerOrders[iCount][1].burger_count += burger_count; 
+    //         iCount++;
+    //     }
+    //     else // Adjust
+    //     {
+    //         CustomerOrders.push[[aQueue[iCount][0]], aQueue[iCount][1]];
+    //         iCount++;
+    //     } 
+    //     aQueue.shift();
+    // }
+     //Print out each customer and their total burgers ordered sorted by the most number of burgers ordered
+     //ORDER THIS AFTER PLS DONT FORGET LOL 
+    for (let i=0; i<asCustomers.length; i++)
+        { 
+            //sOutput+= sOutput + asCustomers[i][0] + " ordered "+ asCustomers[0][i] + " Burgers. "+ "<br>"   
+            sOutput= asCustomers[i][0]
+            sQuantity= asCustomers[0][i]
+            sOutputPad+= sOutput.padStart(25," ") + sQuantity + "<br>"
+        }
+        document.getElementById("dinnerisserved").innerHTML =  sOutput
+}
+    
+    /* queue is a list :) FIFO -- array PUSH and then shift it out that stores customer objects 
+    another array with customer name and total burgers orders 
+    search array for Name
+    FOR LOOP  (use boolean flag Found=true? else )
+    if not found push the shift of Name
+    100 in queue but 9 unique names 
+    return array values lol good luck */
+    </script>
+</body>
+</html>

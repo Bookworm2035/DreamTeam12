@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--Section 04 Group 12
+Nya, Hayden, Natali, Tyler
+Description: This is a program that takes a queue of 100 customers and generates random burger orders and then lists off the total burger count for each customer in order. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures</title>
+</head>
+<body>
+    <!-- HTML button that calls the function LETHIMCOOK-->
+    <button onclick="letHimCook()"> Let him cook! </button>
+    <!-- P tag to be updated later with inner HTML-->
+    <p id="dinnerisserved"> </p>
+
+    <script>
+        //Start of JavaScript
+        //defining open variables
+        let asCustomers = ["Jefe", "El Guapo", "Lucky Day", "Ned Nederlander", "Dusty Bottoms", "Harry Flugleman", "Carmen", "Invisible Swordsman", "Singing Bush"];
+        let aQueue = [];
+        let sOutput = '';
+
+        //order class
+        class Order 
+        {
+            constructor() {
+                this.burger_count = this.randomBurgers();
+            }
+            
+            //Generates a random number of burgers
+            randomBurgers() {
+                return Math.floor(Math.random() * 21) + 1;
+            }
+        }
+
+        // Person class
+        class Person 
+        {
+            constructor() {
+                this.customer_name = this.randomName();
+            }
+            
+            //selects a random name from the array of 9 names and it returns it
+            randomName() {
+                let iNameNum = Math.floor(Math.random() * 9);
+                return asCustomers[iNameNum];
+            }
+        }
+
+        //creating a customer class
+        class Customer extends Person 
+        {
+            constructor() {
+                //call parent 
+                super();
+                this.order = new Order();
+            }
+        }
+        
+        // Function to create and go through the customer queue
+        function letHimCook() 
+        {
+            // Create 100 customers and add them to a queue
+            for (let i = 0; i < 100; i++) 
+            {
+                let oCustomer = new Customer();
+                aQueue.push(oCustomer);
+            }
+            //create an array to store the customers and their burger totals
+            let CustomerOrders = [];
+            
+            //while loop to go through each person and save info to a variable
+            while (aQueue.length > 0) 
+            {
+                let customer = aQueue.shift();
+                let customerName = customer.customer_name;
+                let burgerCount = customer.order.burger_count;
+
+                let customerExists = false;
+                //for each position in the array look for the customer name and add to their burger count
+                //add the name if not found
+                for (let j = 0; j < CustomerOrders.length; j++) 
+                {
+                    if (CustomerOrders[j][0] === customerName) 
+                    {
+                        CustomerOrders[j][1] += burgerCount;
+                        customerExists = true;
+                    }
+                }
+                // if customer does not exist add them to the array 
+                if (!customerExists) 
+                {
+                    CustomerOrders.push([customerName, burgerCount]);
+                }
+            }
+            // Sort by the number of burgers (descending order)
+            CustomerOrders.sort((a, b) => b[1] - a[1]); 
+
+            //Print out each customer and their total burgers ordered in order
+            let sOutputPad = '';
+            for (let i=0; i<CustomerOrders.length; i++)
+            {  
+            let sOutput= CustomerOrders[i][0];
+            let sQuantity= CustomerOrders[i][1];
+            //add the padding so all orders are lined up
+            sOutputPad += sOutput.padEnd(50, ' ') + sQuantity + "<br>";
+            }
+            //dinner is served aka watch the magic happen (especially with the <pre> action to format)
+            document.getElementById("dinnerisserved").innerHTML = '<pre>' + sOutputPad + '</pre>';
+        }
+    </script>
+</body>
+</html>
