@@ -10946,8 +10946,8 @@ header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
-  color: #fff;
-  background-image: url("../assets/img/dessertbackground.jpg");
+  color: black;
+  background-image: url("../assets/img/BakingBackground.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11127,7 +11127,7 @@ header.masthead .masthead-heading {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  /* background-color: #ffc800; */
+  background-color: #ffc800; 
 }
 .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
   font-size: 10px;
