@@ -117,16 +117,20 @@
                     <input type="number" step="0.01" id="Price" name="Price" required>
                     <br>
                     <br>
-                    <label class="formtext" for="Stars">Stars: <span id="starsValue">3</span></label>
-                    <input type="range" id="Stars" name="Stars" min="1" max="5" value="3" oninput="updateStarsValue(this.value)" required>
-                    <br>
-                    <div class="static-numbers">
-                        <span>1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>4</span>
-                        <span>5</span>
-                    </div>
+                    <div id="slider-container">
+                        <!--CHANGE - get the label to be on the left, not over the 2-->
+                        <label class="formtext" for="Stars">Stars: <span id="starsValue">3</span></label>
+                        <br>
+                        <input style="width: 90%;" type="range" id="Stars" name="Stars" min="1" max="5" value="3" oninput="updateStarsValue(this.value)" required>
+                        <div class="static-numbers">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                        </div>
+                        <br>
+                    </div> 
                     <br>
                     <br>
                     <div class="checkbox-container">
