@@ -107,10 +107,10 @@ app.post("/login", (req, res) => {
 
 
 // Display all the users only if logged in
-app.get("/displayUser", (req, res)=> {
+app.get("/displayRow", (req, res)=> {
    const username= req.session.username;
-    knex.select().from("users").then(users => {
-      res.render("displayUser", {myUser: users, username: username});
+    knex.select().from("rows").then(users => {
+      res.render("displayRow", {myUser: users, username: username});
    })
 })
 
@@ -126,13 +126,13 @@ app.get("/database", (req, res) => {
 });
 
 // Site to add user to users
-app.get("/addUser", (req, res) => {
+app.get("/addRow", (req, res) => {
    const username= req.session.username;
-    res.render("addUser", { username: username });
+    res.render("addRow", { username: username });
 })
 
 // Adding to the users table
-app.post("/addUser", (req, res)=> {
+app.post("/addRow", (req, res)=> {
     knex("users").insert({
       username: req.body.username,
       password: req.body.password
@@ -142,7 +142,7 @@ app.post("/addUser", (req, res)=> {
 });
 
 //editing the users DISPLAY if logged in
-app.get("/editUser/:id", (req, res)=> {
+app.get("/editRow/:id", (req, res)=> {
    const username= req.session.username;
     knex.select("user_id",
       "username",
@@ -155,7 +155,7 @@ app.get("/editUser/:id", (req, res)=> {
 });
 
 //editing the users DISPLAY if logged in
-app.post("/editUser", (req, res)=> {
+app.post("/editRow", (req, res)=> {
    knex("users").where("user_id", parseInt(req.body.user_id)).update({
       username: req.body.username,
       password: req.body.password
@@ -165,7 +165,7 @@ app.post("/editUser", (req, res)=> {
 });
 
 //deleting users (if logged in)
-app.post("/deleteUser/:id", (req, res) => {
+app.post("/deleteRow/:id", (req, res) => {
    knex("users").where("user_id",req.params.id).del().then( myUser => {
       res.redirect("/");
    }).catch( err => {
