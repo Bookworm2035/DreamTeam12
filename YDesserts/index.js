@@ -110,7 +110,7 @@ app.post("/login", (req, res) => {
 app.get("/displayRow", (req, res)=> {
    const username= req.session.username;
     knex.select().from("rows").then(users => {
-      res.render("displayRow", {myUser: users, username: username});
+      res.render("displayRow", {myRows: rows, username: username});
    })
 })
 

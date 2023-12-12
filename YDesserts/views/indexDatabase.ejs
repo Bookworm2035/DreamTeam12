@@ -115,18 +115,18 @@ html lang="en">
         </thead>
         <tbody>
             <!-- Loop through records and populate the table, starting from the second row -->
-            <% for (let iCount = 1; iCount < myUser.length; iCount++) { %>
+            <% for (let iCount = 1; iCount < myRows.length; iCount++) { %>
             <tr>
                 <!-- Adjust these columns based on your actual column names -->
-                <td><%= myUser[iCount].username %></td>
-                <td><%= myUser[iCount].password %></td>
+                <td><%= myRows[iCount].username %></td>
+                <td><%= myRows[iCount].password %></td>
                 <td style="text-align: center;">
-                    <form action="/editUser/<%= myUser[iCount].user_id %>" method="GET">
+                    <form action="/editRow/<%= myRows[iCount].user_id %>" method="GET">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
                 <td style="text-align: center;">
-                    <form action="/deleteUser/<%= myUser[iCount].user_id %>" method="POST">
+                    <form action="/deleteRow/<%= myRows[iCount].user_id %>" method="POST">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
