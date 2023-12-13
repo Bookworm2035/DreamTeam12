@@ -228,7 +228,7 @@ app.post("/submitsurvey", async (req, res) => {
          restaurantID = newRestaurantID[0];
       }
 
-      let userID = await checkIfDataExists(req.body.Email, '');
+      let userID = await checkIfDataExists(req.body.Email);
 
       if (!userID) {
          const newUserID = await knex("User")
