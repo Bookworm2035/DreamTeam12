@@ -3,6 +3,7 @@
 //Set variables for apps 
 const session = require("express-session");
 const express = require("express");
+const { checkIfDataExists } = require('./dataOperations');
 let app = express();
 
 //store username & passwords to local storage
@@ -77,15 +78,10 @@ app.get("/indexUser", (req, res) => {
    }
 });
 
-//logout page
-app.get("/logout", (req, res) => {
-   res.render("logout");
-})
-
 //login page that authenticates
 app.post("/login", (req, res) => {
-   const { username, password } =req.body
-    knex("users")
+   const { username, password } = req.body
+    knex("Login")
         .where({ username, password })
         .first()
         .then(user => {
@@ -105,20 +101,22 @@ app.post("/login", (req, res) => {
         });
 });
 
-
-// Display all the users only if logged in
-app.get("/displayRow", (req, res)=> {
-   const username= req.session.username;
-    knex.select().from("rows").then(users => {
-      res.render("displayRow", {myRows: rows, username: username});
-   })
-})
-
 // Displaying database
 app.get("/database", (req, res) => {
    const username= req.session.username; 
-   knex.select().from("persons").then(myPersons => {
-      res.render("database", {allPersons: myPersons, username: username})
+   knex.select().from("Review").then(myReview => {
+      res.render("database", {allReviews: myReview, username: username})
+   }).catch(error => {
+      console.error('Error fetching all persons:', error);
+      res.status(500).send('Error fetching all persons');
+   });
+});
+
+// Displaying database
+app.get("/indexDatabase", (req, res) => {
+   const username= req.session.username; 
+   knex.select().from("Review").then(myReview => {
+      res.render("indexDatabase", {allReviews: myReview, username: username})
    }).catch(error => {
       console.error('Error fetching all persons:', error);
       res.status(500).send('Error fetching all persons');
@@ -126,28 +124,34 @@ app.get("/database", (req, res) => {
 });
 
 // Site to add user to users
-app.get("/addRow", (req, res) => {
-   const username= req.session.username;
-    res.render("addRow", { username: username });
-})
+//app.get("/addRow", (req, res) => {
+  // const username= req.session.username;
+  // res.render("addRow", { username: username });
+//})
 
 // Adding to the users table
-app.post("/addRow", (req, res)=> {
-    knex("users").insert({
-      username: req.body.username,
-      password: req.body.password
-   }).then(myUser => {
-      res.redirect("/");
-   })
-});
+//app.post("/addRow", (req, res)=> {
+  //  knex("users").insert({
+    //  username: req.body.username,
+    //  password: req.body.password
+  // }).then(myUser => {
+    //  res.redirect("/");
+  // })
+//});
 
 //editing the users DISPLAY if logged in
 app.get("/editRow/:id", (req, res)=> {
    const username= req.session.username;
-    knex.select("user_id",
-      "username",
-      "password").from("users").where("user_id", req.params.id).then(User => {
-    res.render("editRow", {myUser: User, username: username});
+    knex.select("ReviewID", // do i need the ReviewID?
+      "DessertID",
+      "Description",
+      "Stars",
+      "GlutenFree",
+      "DairyFree",
+      "Group",
+      "Price",
+      "UserID").from("Review").where("ReviewID", req.params.id).then(Row => {
+    res.render("editRow", {myRows: Row, username: username});
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
@@ -156,17 +160,23 @@ app.get("/editRow/:id", (req, res)=> {
 
 //editing the users DISPLAY if logged in
 app.post("/editRow", (req, res)=> {
-   knex("users").where("user_id", parseInt(req.body.user_id)).update({
-      username: req.body.username,
-      password: req.body.password
-   }).then(myUser => {
+   knex("Review").where("ReviewID", parseInt(req.body.ReviewID)).update({
+      DessertID: req.body.DessertID,
+      Description: req.body.Description,
+      Stars: req.body.Stars,
+      GlutenFree: req.body.GlutenFree,
+      DairyFree: req.body.DairyFree,
+      Group: req.body.Group,
+      Price: req.body.Price,
+      UserID: req.body.UserID
+   }).then(myRows => {
       res.redirect("/");
    })
 });
 
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
-   knex("users").where("user_id",req.params.id).del().then( myUser => {
+   knex("Review").where("ReviewID",req.params.id).del().then( myRows => {
       res.redirect("/");
    }).catch( err => {
       console.log(err);
@@ -176,54 +186,65 @@ app.post("/deleteRow/:id", (req, res) => {
 
 //submiting the survey
 app.post("/submitsurvey", async (req, res) => {
-   const hardcodedorigin = "Provo";
-   const selectedPlatforms = req.body.PlatformID;
    try {
-      const surveyId = await knex("persons")
+      let dessertID = await checkIfDataExists(req.body.DessertName);
+
+      if (!dessertID) {
+         const newDessertId = await knex("Dessert")
          .insert({
-            Age: req.body.Age,
-            Gender:req.body.Gender,
-            RelationshipStatus:req.body.RelationshipStatus,
-            OccupationStatus: req.body.OccupationStatus,
-            UniversityAffiliation: req.body.UniversityAffiliation,
-            SchoolAffiliation: req.body.SchoolAffiliation,
-            CompanyAffiliation: req.body.CompanyAffiliation,
-            GovernmentAffiliation: req.body.GovernmentAffiliation,
-            PrivateAffiliation: req.body.PrivateAffiliation,
-            SocialMediaUser: req.body.SocialMediaUser,
-            UsageID: req.body.UsageID,
-            Q1: req.body.Q1,
-            Q2: req.body.Q2,
-            Q3: req.body.Q3,
-            Q4: req.body.Q4,
-            Q5: req.body.Q5,
-            Q6: req.body.Q6,
-            Q7: req.body.Q7,
-            Q8: req.body.Q8,
-            Q9: req.body.Q9,
-            Q10: req.body.Q10,
-            Q11: req.body.Q11,
-            Q12: req.body.Q12,
-            Origin: hardcodedorigin
+            DessertName: req.body.DessertName
          })
-         .returning('PersonID');
-      console.log(surveyId);
-      const platformInsertPromises = selectedPlatforms.map(platform => {
-         return knex("records").insert({
-            Date: knex.raw('CURRENT_TIMESTAMP'),
-            Time: knex.raw('CURRENT_TIMESTAMP'),
-            OccupationStatus: req.body.OccupationStatus,
-            PlatformID: platform,
-            PersonID: surveyId[0].PersonID,
-         });
+         .returning("DessertID");
+
+         dessertID = newDessertId[0];
+      }
+
+      let restaurantID = await checkIfDataExists(req.body.RestName, req.body.StreetAddress);
+
+      if (!restaurantID) {
+         const newRestaurantID = await knex("Restaurant")
+            .insert({
+               RestName: req.body.RestName,
+               StreetAddress: req.body.StreetAddress
+            })
+            .returning("RestaurantID");
+
+         restaurantID = newRestaurantID[0];
+      }
+
+      let userID = await checkIfDataExists(req.body.Email, '');
+
+      if (!userID) {
+         const newUserID = await knex("User")
+            .insert({
+               FirstName: req.body.FirstName,
+               LastName: req.body.LastName,
+               Email: req.body.Email
+            })
+            .returning("UserID");
+         
+         userID = newUserID[0];
+      }
+
+      await knex("Review").insert({
+         DessertID: dessertID,
+         RestaurantID: restaurantID,
+         Description: req.body.Description,
+         Stars: req.body.Stars,
+         GlutenFree: req.body.GlutenFree,
+         DairyFree: req.body.DairyFree,
+         Group: req.body.Group,
+         Price: req.body.Price,
+         UserID: userID
       });
-      await Promise.all(platformInsertPromises);
-      res.redirect("/");
+ 
+     res.redirect("/");
    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Error submitting survey.');
+     console.error('Error:', error);
+     res.status(500).send('Error submitting survey.');
    }
 });
+ 
 
  //listen at the end
 app.listen(port,() => console.log("I am listening"));

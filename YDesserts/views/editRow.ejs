@@ -132,14 +132,33 @@
                     <h1 class="formtext" style="text-align: center;">Edit a User</h1>
                     <br>
                     <hr style="border: 1px solid #ccc; margin: 20px 0;">
-                    <form action="/editUser" method="POST">
-                        <input type="hidden" id="user_id" name="user_id" value="<%=myUser[0].user_id %>">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" value="<%=myUser[0].username %>">
+                    <form action="/editRow" method="POST">
+                        <input type="hidden" id="ReviewID" name="ReviewID" value="<%=myRows[0].ReviewID %>">
+                        <label for="DessertID">DessertID:</label>
+                        <input type="text" id="DessertID" name="DessertID" value="<%=myRows[0].DessertID %>">
                         <br><br>
-                        <label for="password">Password:</label>
-                        <input type="text" id="password" name="password" value="<%=myUser[0].password %>">
+                        <label for="Description">Description:</label>
+                        <input type="text" id="Description" name="Description" value="<%=myRows[0].Description %>">
                         <br><br>
+                        <label for="Stars">Stars:</label>
+                        <input type="text" id="Stars" name="Stars" value="<%=myRows[0].Stars %>">
+                        <br><br>
+                        <label for="GlutenFree">Gluten Free:</label>
+                        <input type="text" id="GlutenFree" name="GlutenFree" value="<%=myRows[0].GlutenFree %>">
+                        <br><br>
+                        <label for="DairyFree">Dairy Free:</label>
+                        <input type="text" id="DairyFree" name="DairyFree" value="<%=myRows[0].DairyFree %>">
+                        <br><br>
+                        <label for="Group">Group:</label>
+                        <input type="text" id="Group" name="Group" value="<%=myRows[0].Group %>">
+                        <br><br>
+                        <label for="Price">Price:</label>
+                        <input type="text" id="Price" name="Price" value="<%=myRows[0].Price %>">
+                        <br><br>
+                        <label for="UserID">UserID:</label>
+                        <input type="text" id="UserID" name="UserID" value="<%=myRows[0].UserID %>">
+                        <br><br>
+                        
                       <button type="submit">Save</button>
                     </form>
                 </div>

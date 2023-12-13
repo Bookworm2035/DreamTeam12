@@ -86,8 +86,7 @@ html lang="en">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="indexUser">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="database">Database</a></li>
-                        <li class="nav-item"><a class="nav-link" href="displayUser">Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="indexDatabase">Database</a></li>
                         <li class="nav-item"><a class="nav-link" href="/">Logout: <%= username %></a></li>
 
                     </ul>
@@ -101,32 +100,48 @@ html lang="en">
   <!--MAKE THIS BIGGER AND PRETTIER-->
     <label><b><h2>User Login Information:</h2></b></label>
     <br><br>
+    
     <table class="content-table">
         <thead>
             <tr>
               <!--Add in two line breaks to make more readable -->
               <br>
               <br>
-                <th style="text-align: left;">Username</th>
-                <th style="text-align: left;">Password</th>
-                <th></th>
-                <th></th>
+              <th style="text-align: left;">ReviewID</th>
+              <th style="text-align: left;">DessertID</th>
+              <th style="text-align: left;">RestaurantID</th>
+              <th style="text-align: left;">Description</th>
+              <th style="text-align: left;">Stars</th>
+              <th style="text-align: left;">Gluten Free</th>
+              <th style="text-align: left;">Dairy Free</th>
+              <th style="text-align: left;">Group</th>
+              <th style="text-align: left;">Price</th>
+              <th style="text-align: left;">UserID</th>
+              <th></th>
+              <th></th>
             </tr>
         </thead>
         <tbody>
             <!-- Loop through records and populate the table, starting from the second row -->
-            <% for (let iCount = 1; iCount < myRows.length; iCount++) { %>
-            <tr>
+            <% for (let iCount = 0; iCount < allReviews.length; iCount++) { %>
+                <tr>
                 <!-- Adjust these columns based on your actual column names -->
-                <td><%= myRows[iCount].username %></td>
-                <td><%= myRows[iCount].password %></td>
+                <td><%= allReviews[iCount].ReviewID %></td>
+                <td><%= allReviews[iCount].DessertID %></td>
+                <td><%= allReviews[iCount].Description %></td>
+                <td><%= allReviews[iCount].Stars %></td>
+                <td><%= allReviews[iCount].GlutenFree %></td>
+                <td><%= allReviews[iCount].DairyFree %></td>
+                <td><%= allReviews[iCount].Group %></td>
+                <td><%= allReviews[iCount].Price %></td>
+                <td><%= allReviews[iCount].UserID %></td>
                 <td style="text-align: center;">
-                    <form action="/editRow/<%= myRows[iCount].user_id %>" method="GET">
+                    <form action="/editRow/<%= myRows[iCount].ReviewID %>" method="GET">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
                 <td style="text-align: center;">
-                    <form action="/deleteRow/<%= myRows[iCount].user_id %>" method="POST">
+                    <form action="/deleteRow/<%= myRows[iCount].ReviewID %>" method="POST">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
@@ -135,9 +150,6 @@ html lang="en">
         </tbody>
     </table>
     <br><br>
-    <form action="/addUser" method="GET">
-        <button type="submit">Add User</button>
-    </form>
 </body>
 
 </html>
