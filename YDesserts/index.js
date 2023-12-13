@@ -32,7 +32,7 @@ const knex = require("knex")({
          process.env.DB_ENDPOINT || 
          "awseb-e-pib2957zu6-stack-awsebrdsdatabase-epobgxcfn9yl.clg8l9gauvu4.us-east-2.rds.amazonaws.com",
    user: process.env.RDS_USERNAME || "postgres",
-   password: process.env.RDS_PASSWORD || "tdogtyler14",
+   password: process.env.RDS_PASSWORD || "t dog tyler14",
    database: process.env.RDS_DB_NAME || "YDesserts",
    port: process.env.RDS_PORT || 5432,
    ssl: process.env.DB_SSL ? {rejectUnauthorized: false}: false 
