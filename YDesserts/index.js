@@ -110,7 +110,7 @@ app.post("/login", (req, res) => {
 app.get("/displayRow", (req, res)=> {
    const username= req.session.username;
     knex.select().from("rows").then(users => {
-      res.render("displayRow", {myUser: users, username: username});
+      res.render("displayRow", {myRows: rows, username: username});
    })
 })
 
@@ -147,7 +147,7 @@ app.get("/editRow/:id", (req, res)=> {
     knex.select("user_id",
       "username",
       "password").from("users").where("user_id", req.params.id).then(User => {
-    res.render("editUser", {myUser: User, username: username});
+    res.render("editRow", {myUser: User, username: username});
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
