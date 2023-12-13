@@ -124,20 +124,20 @@ app.get("/indexDatabase", (req, res) => {
 });
 
 // Site to add user to users
-//app.get("/addRow", (req, res) => {
-  // const username= req.session.username;
-  // res.render("addRow", { username: username });
-//})
+app.get("/addUser", (req, res) => {
+  const username= req.session.username;
+  res.render("addUser", { username: username });
+})
 
-// Adding to the users table
-//app.post("/addRow", (req, res)=> {
-  //  knex("users").insert({
-    //  username: req.body.username,
-    //  password: req.body.password
-  // }).then(myUser => {
-    //  res.redirect("/");
-  // })
-//});
+//Adding to the users table
+app.post("/addUser", (req, res)=> {
+   knex("Login").insert({
+      username: req.body.username,
+      password: req.body.password
+   }).then(myUser => {
+   res.redirect("/");
+  })
+});
 
 //editing the users DISPLAY if logged in
 app.get("/editRow/:id", (req, res)=> {
@@ -176,7 +176,7 @@ app.post("/editRow", (req, res)=> {
 
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
-   knex("Review").where("ReviewID",req.params.id).del().then( myRows => {
+   knex("Review").where("ReviewID", req.params.id).del().then( myRows => {
       res.redirect("/");
    }).catch( err => {
       console.log(err);
