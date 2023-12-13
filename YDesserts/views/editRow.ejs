@@ -133,37 +133,40 @@
                     <br>
                     <hr style="border: 1px solid #ccc; margin: 20px 0;">
                     <form action="/editRow" method="POST">
-                        <input type="hidden" id="ReviewID" name="ReviewID" value="<%=myRows[0].ReviewID %>">
+                        <input type="hidden" id="ReviewID" name="ReviewID" value="<%=allReviews[0].ReviewID %>">
                         <label for="DessertID">DessertID:</label>
-                        <input type="text" id="DessertID" name="DessertID" value="<%=myRows[0].DessertID %>">
+                        <input type="text" id="DessertID" name="DessertID" value="<%=allReviews[0].DessertID %>">
+                        <br><br>
+                        <label for="RestaurantID">RestaurantID:</label>
+                        <input type="text" id="RestaurantID" name="RestaurantID" value="<%=allReviews[0].RestaurantID %>">
                         <br><br>
                         <label for="Description">Description:</label>
-                        <input type="text" id="Description" name="Description" value="<%=myRows[0].Description %>">
+                        <input type="text" id="Description" name="Description" value="<%=allReviews[0].Description %>">
                         <br><br>
                         <label for="Stars">Stars:</label>
-                        <input type="text" id="Stars" name="Stars" value="<%=myRows[0].Stars %>">
+                        <input type="text" id="Stars" name="Stars" value="<%=allReviews[0].Stars %>">
                         <br><br>
                         <label for="GlutenFree">Gluten Free? (Y/N):</label>
-                        <input type="checkbox" id="GlutenFree" name="GlutenFree" <%= myRows[0].GlutenFree == "Y" ? "checked" : "" %>>
+                        <input type="checkbox" id="GlutenFree" name="GlutenFree" <%= allReviews[0].GlutenFree == "Y" ? "checked" : "" %>>
                         <br><br>
                         <label for="DairyFree">Dairy Free? (Y/N):</label>
-                        <input type="checkbox" id="DairyFree" name="DairyFree" <%= myRows[0].DairyFree == "Y" ? "checked" : "" %>>
+                        <input type="checkbox" id="DairyFree" name="DairyFree" <%= allReviews[0].DairyFree == "Y" ? "checked" : "" %>>
                         <br><br>
                         <fieldset style="width: 100 px;">
-                            <legend>Group:</legend>
-                            <input type="radio" id="Brownies" name="Group" value="Brownies" <%= myRows[0].Group == "Brownies" ? "checked" : "" %>>
-                            <label for="GroupCategory">Brownies</label><br>
-                            <input type="radio" id="Cookies" name="Group" value="Cookies" <%= myRows[0].Group == "Cookies" ? "checked" : "" %>>
-                            <label for="GroupCategory">Cookies</label><br>
-                            <input type="radio" id="Ice Cream" name="Group" value="Ice Cream" <%= myRows[0].Group == "Ice Cream" ? "checked" : "" %>>
-                            <label for="GroupCategory">Ice Cream</label><br>
+                            <label class="formtext clear-float" for="Group" style="display: inline-block; width: 900px; margin-right: 100px;">Which category is your dessert in?</label>
+                            <label for="Brownies">Brownies</label>
+                            <input type="radio" id="Group" name="Group" value="Brownies" <%= allReviews[0].Group == "Brownies" ? "checked" : "" %>>
+                            <label for="Cookies">Cookies</label>
+                            <input type="radio" id="Group" name="Group" value="Cookies" <%= allReviews[0].Group == "Cookies" ? "checked" : "" %>>
+                            <label for="IceCream">Ice Cream</label>
+                            <input type="radio" id="Group" name="Group" value="Ice Cream" <%= allReviews[0].Group == "Ice Cream" ? "checked" : "" %>>
                         </fieldset>
                         <br><br>
                         <label for="Price">Price:</label>
-                        <input type="text" id="Price" name="Price" value="<%=myRows[0].Price %>">
+                        <input type="text" id="Price" name="Price" value="<%=allReviews[0].Price %>">
                         <br><br>
                         <label for="UserID">UserID:</label>
-                        <input type="text" id="UserID" name="UserID" value="<%=myRows[0].UserID %>">
+                        <input type="text" id="UserID" name="UserID" value="<%=allReviews[0].UserID %>">
                         <br><br>
                         
                       <button type="submit">Save</button>

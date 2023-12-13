@@ -112,6 +112,20 @@ app.get("/database", (req, res) => {
    });
 });
 
+app.get("/reviewDetails/:reviewID", async (req, res) => {
+   try {
+      // Retrieve review details based on the reviewID from the URL parameter
+      const reviewID = req.params.reviewID;
+      const reviewDetails = await knex("Review").where({ ReviewID: reviewID }).first();
+
+      // Render the reviewDetails.ejs template with the retrieved details
+      res.render("reviewDetails", { reviewDetails });
+   } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send('Error retrieving review details.');
+   }
+});
+
 // Displaying database
 app.get("/indexDatabase", (req, res) => {
    const username= req.session.username; 
@@ -144,6 +158,7 @@ app.get("/editRow/:id", (req, res)=> {
    const username= req.session.username;
     knex.select("ReviewID", 
       "DessertID",
+      "RestaurantID",
       "Description",
       "Stars",
       "GlutenFree",
@@ -162,6 +177,7 @@ app.get("/editRow/:id", (req, res)=> {
 app.post("/editRow", (req, res)=> {
    knex("Review").where("ReviewID", parseInt(req.body.ReviewID)).update({
       DessertID: req.body.DessertID,
+      RestaurantID: req.body.RestaurantID,
       Description: req.body.Description,
       Stars: req.body.Stars,
       GlutenFree: req.body.GlutenFree ? "Y" : "N",
