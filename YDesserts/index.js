@@ -142,7 +142,7 @@ app.post("/addUser", (req, res)=> {
 //editing the users DISPLAY if logged in
 app.get("/editRow/:id", (req, res)=> {
    const username= req.session.username;
-    knex.select("ReviewID", // do i need the ReviewID?
+    knex.select("ReviewID", 
       "DessertID",
       "Description",
       "Stars",
@@ -150,8 +150,8 @@ app.get("/editRow/:id", (req, res)=> {
       "DairyFree",
       "Group",
       "Price",
-      "UserID").from("Review").where("ReviewID", req.params.id).then(Row => {
-    res.render("editRow", {myRows: Row, username: username});
+      "UserID").from("Review").where("ReviewID", req.params.id).then(myReview => {
+    res.render("editRow", {allReviews: myReview, username: username});
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
@@ -164,19 +164,19 @@ app.post("/editRow", (req, res)=> {
       DessertID: req.body.DessertID,
       Description: req.body.Description,
       Stars: req.body.Stars,
-      GlutenFree: req.body.GlutenFree,
-      DairyFree: req.body.DairyFree,
+      GlutenFree: req.body.GlutenFree ? "Y" : "N",
+      DairyFree: req.body.DairyFree ? "Y" : "N",
       Group: req.body.Group,
       Price: req.body.Price,
       UserID: req.body.UserID
-   }).then(myRows => {
+   }).then(allReviews => {
       res.redirect("/");
    })
 });
 
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
-   knex("Review").where("ReviewID", req.params.id).del().then( myRows => {
+   knex("Review").where("ReviewID", req.params.id).del().then( allReviews => {
       res.redirect("/");
    }).catch( err => {
       console.log(err);
@@ -231,8 +231,8 @@ app.post("/submitsurvey", async (req, res) => {
          RestaurantID: restaurantID,
          Description: req.body.Description,
          Stars: req.body.Stars,
-         GlutenFree: req.body.GlutenFree,
-         DairyFree: req.body.DairyFree,
+         GlutenFree: req.body.GlutenFree ? "Y" : "N",
+         DairyFree: req.body.DairyFree ? "Y" : "N",
          Group: req.body.Group,
          Price: req.body.Price,
          UserID: userID

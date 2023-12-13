@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Mindful Provo</title>
+        <title>Y Desserts</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -143,14 +143,21 @@
                         <label for="Stars">Stars:</label>
                         <input type="text" id="Stars" name="Stars" value="<%=myRows[0].Stars %>">
                         <br><br>
-                        <label for="GlutenFree">Gluten Free:</label>
-                        <input type="text" id="GlutenFree" name="GlutenFree" value="<%=myRows[0].GlutenFree %>">
+                        <label for="GlutenFree">Gluten Free? (Y/N):</label>
+                        <input type="checkbox" id="GlutenFree" name="GlutenFree" <%= myRows[0].GlutenFree == "Y" ? "checked" : "" %>>
                         <br><br>
-                        <label for="DairyFree">Dairy Free:</label>
-                        <input type="text" id="DairyFree" name="DairyFree" value="<%=myRows[0].DairyFree %>">
+                        <label for="DairyFree">Dairy Free? (Y/N):</label>
+                        <input type="checkbox" id="DairyFree" name="DairyFree" <%= myRows[0].DairyFree == "Y" ? "checked" : "" %>>
                         <br><br>
-                        <label for="Group">Group:</label>
-                        <input type="text" id="Group" name="Group" value="<%=myRows[0].Group %>">
+                        <fieldset style="width: 100 px;">
+                            <legend>Group:</legend>
+                            <input type="radio" id="Brownies" name="Group" value="Brownies" <%= myRows[0].Group == "Brownies" ? "checked" : "" %>>
+                            <label for="GroupCategory">Brownies</label><br>
+                            <input type="radio" id="Cookies" name="Group" value="Cookies" <%= myRows[0].Group == "Cookies" ? "checked" : "" %>>
+                            <label for="GroupCategory">Cookies</label><br>
+                            <input type="radio" id="Ice Cream" name="Group" value="Ice Cream" <%= myRows[0].Group == "Ice Cream" ? "checked" : "" %>>
+                            <label for="GroupCategory">Ice Cream</label><br>
+                        </fieldset>
                         <br><br>
                         <label for="Price">Price:</label>
                         <input type="text" id="Price" name="Price" value="<%=myRows[0].Price %>">

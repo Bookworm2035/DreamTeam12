@@ -103,8 +103,6 @@
         <thead>
             <tr>
               <!--Add in two line breaks to make more readable -->
-              <br>
-              <br>
                 <th style="text-align: left;">ReviewID</th>
                 <th style="text-align: left;">DessertID</th>
                 <th style="text-align: left;">RestaurantID</th>
@@ -115,8 +113,6 @@
                 <th style="text-align: left;">Group</th>
                 <th style="text-align: left;">Price</th>
                 <th style="text-align: left;">UserID</th>
-                <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -126,6 +122,7 @@
                 <!-- Adjust these columns based on your actual column names -->
                 <td><%= allReviews[iCount].ReviewID %></td>
                 <td><%= allReviews[iCount].DessertID %></td>
+                <td><%= allReviews[iCount].RestaurantID %></td>
                 <td><%= allReviews[iCount].Description %></td>
                 <td><%= allReviews[iCount].Stars %></td>
                 <td><%= allReviews[iCount].GlutenFree %></td>

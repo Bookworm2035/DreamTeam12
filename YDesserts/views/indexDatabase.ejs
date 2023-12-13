@@ -5,7 +5,7 @@ html lang="en">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Mindful Provo</title>
+        <title>Y Desserts</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/img/utahfavcon.png" />
         <!-- Font Awesome icons (free version)-->
@@ -128,6 +128,7 @@ html lang="en">
                 <!-- Adjust these columns based on your actual column names -->
                 <td><%= allReviews[iCount].ReviewID %></td>
                 <td><%= allReviews[iCount].DessertID %></td>
+                <td><%= allReviews[iCount].RestaurantID %></td>
                 <td><%= allReviews[iCount].Description %></td>
                 <td><%= allReviews[iCount].Stars %></td>
                 <td><%= allReviews[iCount].GlutenFree %></td>
@@ -136,12 +137,12 @@ html lang="en">
                 <td><%= allReviews[iCount].Price %></td>
                 <td><%= allReviews[iCount].UserID %></td>
                 <td style="text-align: center;">
-                    <form action="/editRow/<%= myRows[iCount].ReviewID %>" method="GET">
+                    <form action="/editRow/<%= allReviews[iCount].ReviewID %>" method="GET">
                         <button type="submit">Edit</button>
                     </form>
                 </td>
                 <td style="text-align: center;">
-                    <form action="/deleteRow/<%= myRows[iCount].ReviewID %>" method="POST">
+                    <form action="/deleteRow/<%= allReviews[iCount].ReviewID %>" method="POST">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
