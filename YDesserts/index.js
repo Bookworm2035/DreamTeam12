@@ -161,7 +161,6 @@ app.get("/editRow/:id", (req, res)=> {
       "Stars",
       "GlutenFree",
       "DairyFree",
-      "Group",
       "Price",
       "UserID").from("Review").where("ReviewID", req.params.id).then(myReview => {
     res.render("editRow", {allReviews: myReview, username: username});
@@ -180,7 +179,6 @@ app.post("/editRow", (req, res)=> {
       Stars: req.body.Stars,
       GlutenFree: req.body.GlutenFree ? "Y" : "N",
       DairyFree: req.body.DairyFree ? "Y" : "N",
-      Group: req.body.Group,
       Price: req.body.Price,
       UserID: req.body.UserID
    }).then(allReviews => {
@@ -247,7 +245,6 @@ app.post("/submitsurvey", async (req, res) => {
          Stars: req.body.Stars,
          GlutenFree: req.body.GlutenFree ? "Y" : "N",
          DairyFree: req.body.DairyFree ? "Y" : "N",
-         Group: req.body.Group,
          Price: req.body.Price,
          UserID: userID
       });
