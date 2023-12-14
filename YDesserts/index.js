@@ -120,7 +120,7 @@ app.get("/reviewDetails/:reviewID", async (req, res) => {
       .from('Review')
       .join('User as U', 'Review.UserID', '=','U.UserID')
       .join('Restaurant as R', 'Review.RestaurantID', '=','R.RestaurantID')
-      .join('DessertName as D', 'Review.DessertID', '=','D.DessertID')
+      .join('Dessert as D', 'Review.DessertID', '=','D.DessertID')
       .where({ ReviewID: reviewID }).first();
 
       // Render the reviewDetails.ejs template with the retrieved details
