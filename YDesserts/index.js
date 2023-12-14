@@ -212,7 +212,11 @@ app.post("/submitsurvey", async (req, res) => {
          .select("DessertID")
          .first();
 
+      console.log("Retrieved dessertIDObj:", dessertIDObj);
+
       let dessertID = dessertIDObj ? dessertIDObj.DessertID : null;
+
+      console.log("Retrieved dessertID:", dessertID);
 
       if (!dessertID) {
          const newDessertId = await knex("Dessert")
