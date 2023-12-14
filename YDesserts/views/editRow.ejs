@@ -125,6 +125,7 @@
     </head>
     <body id="page-top">
         <!-- Submission Form that gets the selected user -->
+        <header class="masthead">
         <section class="page-section" id="services">
             <div class="container">
                 <div class="submission-form">
@@ -152,26 +153,16 @@
                         <label for="DairyFree">Dairy Free? (Y/N):</label>
                         <input type="checkbox" id="DairyFree" name="DairyFree" <%= allReviews[0].DairyFree == "Y" ? "checked" : "" %>>
                         <br><br>
-                        <fieldset style="width: 100 px;">
-                            <label class="formtext clear-float" for="Group" style="display: inline-block; width: 900px; margin-right: 100px;">Which category is your dessert in?</label>
-                            <label for="Brownies">Brownies</label>
-                            <input type="radio" id="Group" name="Group" value="Brownies" <%= allReviews[0].Group == "Brownies" ? "checked" : "" %>>
-                            <label for="Cookies">Cookies</label>
-                            <input type="radio" id="Group" name="Group" value="Cookies" <%= allReviews[0].Group == "Cookies" ? "checked" : "" %>>
-                            <label for="IceCream">Ice Cream</label>
-                            <input type="radio" id="Group" name="Group" value="Ice Cream" <%= allReviews[0].Group == "Ice Cream" ? "checked" : "" %>>
-                        </fieldset>
-                        <br><br>
                         <label for="Price">Price:</label>
                         <input type="text" id="Price" name="Price" value="<%=allReviews[0].Price %>">
                         <br><br>
                         <label for="UserID">UserID:</label>
                         <input type="text" id="UserID" name="UserID" value="<%=allReviews[0].UserID %>">
                         <br><br>
-                        
                       <button type="submit">Save</button>
                     </form>
                 </div>
+            </header>
                 <br>
                 <br>
                 <br>
