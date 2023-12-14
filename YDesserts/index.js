@@ -225,7 +225,7 @@ app.post("/submitsurvey", async (req, res) => {
             })
             .returning("DessertID");
 
-         dessertID = newDessertId[0];
+         dessertID = newDessertId[0].DessertID;
       }
 
       let restaurantIDObj = await knex("Restaurant")
@@ -246,7 +246,7 @@ app.post("/submitsurvey", async (req, res) => {
             })
             .returning("RestaurantID");
 
-         restaurantID = newRestaurantID[0];
+         restaurantID = newRestaurantID[0].RestaurantID;
       }
 
       let userIDObj = await knex("User")
@@ -265,7 +265,7 @@ app.post("/submitsurvey", async (req, res) => {
             })
             .returning("UserID");
 
-         userID = newUserID[0];
+         userID = newUserID[0].UserID;
       }
 
       await knex("Review").insert({
