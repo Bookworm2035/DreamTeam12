@@ -182,14 +182,14 @@ app.post("/editRow", (req, res)=> {
       Price: req.body.Price,
       UserID: req.body.UserID
    }).then(allReviews => {
-      res.redirect("/");
+      res.redirect("indexDatabase");
    })
 });
 
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
    knex("Review").where("ReviewID", req.params.id).del().then( allReviews => {
-      res.redirect("/");
+      res.redirect("indexDatabase");
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
@@ -237,7 +237,9 @@ app.post("/submitsurvey", async (req, res) => {
          
          userID = newUserID[0];
       }
-
+console.log(Email)
+console.log(Stars)
+console.log(DairyFree)
       await knex("Review").insert({
          DessertID: dessertID,
          RestaurantID: restaurantID,
