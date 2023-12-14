@@ -190,7 +190,7 @@ app.post("/editRow", (req, res)=> {
       Price: req.body.Price,
       UserID: req.body.UserID
    }).then(allReviews => {
-      res.redirect("/");
+      res.redirect("indexDatabase");
    })
 });
 
