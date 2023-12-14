@@ -3,7 +3,7 @@
 //Set variables for apps 
 const session = require("express-session");
 const express = require("express");
-const { checkIfDataExists } = require('./dataOperations');
+//const { checkIfDataExists } = require('./dataOperations');
 let app = express();
 
 //store username & passwords to local storage
