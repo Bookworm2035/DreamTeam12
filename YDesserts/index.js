@@ -207,19 +207,28 @@ app.post("/deleteRow/:id", (req, res) => {
 //submiting the survey
 app.post("/submitsurvey", async (req, res) => {
    try {
-      let dessertID = await checkIfDataExists(req.body.DessertName);
+      let dessertID = await knex("Dessert")
+         .where({ DessertName: req.body.DessertName })
+         .select("DessertID")
+         .first();
 
       if (!dessertID) {
          const newDessertId = await knex("Dessert")
-         .insert({
-            DessertName: req.body.DessertName
-         })
-         .returning("DessertID");
+            .insert({
+               DessertName: req.body.DessertName
+            })
+            .returning("DessertID");
 
          dessertID = newDessertId[0];
       }
 
-      let restaurantID = await checkIfDataExists(req.body.RestName, req.body.StreetAddress);
+      let restaurantID = await knex("Restaurant")
+         .where({
+            RestName: req.body.RestName,
+            StreetAddress: req.body.StreetAddress
+         })
+         .select("RestaurantID")
+         .first();
 
       if (!restaurantID) {
          const newRestaurantID = await knex("Restaurant")
@@ -232,7 +241,10 @@ app.post("/submitsurvey", async (req, res) => {
          restaurantID = newRestaurantID[0];
       }
 
-      let userID = await checkIfDataExists(req.body.Email);
+      let userID = await knex("User")
+         .where({ Email: req.body.Email })
+         .select("UserID")
+         .first();
 
       if (!userID) {
          const newUserID = await knex("User")
@@ -242,7 +254,7 @@ app.post("/submitsurvey", async (req, res) => {
                Email: req.body.Email
             })
             .returning("UserID");
-         
+
          userID = newUserID[0];
       }
 
@@ -256,14 +268,14 @@ app.post("/submitsurvey", async (req, res) => {
          Price: req.body.Price,
          UserID: userID
       });
- 
-     res.redirect("/");
+
+      res.redirect("/");
    } catch (error) {
-     console.error('Error:', error);
-     res.status(500).send('Error submitting survey.');
+      console.error('Error:', error);
+      res.status(500).send('Error submitting survey.');
    }
 });
- 
+
 
  //listen at the end
 app.listen(port,() => console.log("I am listening"));
