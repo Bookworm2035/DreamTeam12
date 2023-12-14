@@ -140,9 +140,9 @@
                     <br>
                     <div id="slider-container">
                         <!--CHANGE - get the label to be on the left, not over the 2-->
-                        <label class="formtext" for="Stars">Stars: <span id="starsValue">3</span></label>
+                        <label class="formtext" for="Stars">Stars: </label>
                         <br>
-                        <input style="width: 90%;" type="range" id="Stars" name="Stars" min="1" max="5" value="3" oninput="updateStarsValue(this.value)" required>
+                        <input style="width: 90%;" type="range" id="Stars" name="Stars" min="1" max="5" value="3" required>
                         <div class="static-numbers">
                             <span>1</span>
                             <span>2</span>
@@ -199,10 +199,5 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>      
-        <script>
-            function updateStarsValue(value) {
-                document.getElementById('starsValue').innerText = value;
-            }
-        </script>
     </body>
 </html>

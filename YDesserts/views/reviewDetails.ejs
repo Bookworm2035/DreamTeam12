@@ -7,16 +7,17 @@
 </head>
 <body>
     <h1>Review Details</h1>
-    
     <p>The Review ID is: <%= reviewDetails.ReviewID %></p>
-    <p>The Dessert ID is: <%= reviewDetails.DessertID %></p>
-    <p>The Restaurant ID is: <%= reviewDetails.RestaurantID %></p>
+    <p>The Restaurant Name is: <%= reviewDetails.RestName %></p>
+    <p>The Street Address is: <%= reviewDetails.StreetAddress %></p>
+    <p>The First Name is: <%= reviewDetails.FirstName %></p>
+    <p>The Dessert Name is: <%= reviewDetails.DessertName %></p>
     <p>The Description is: <%= reviewDetails.Description %></p>
     <p>The Stars given are: <%= reviewDetails.Stars %></p>
-    <p>Is it Gluten-Free? <%= reviewDetails.GlutenFree === 'Y' ? 'Yes' : 'No' %></p>
-    <p>Is it Dairy-Free? <%= reviewDetails.DairyFree === 'Y' ? 'Yes' : 'No' %></p>
     <p>The Price is: <%= reviewDetails.Price %></p>
-    <p>The User ID is: <%= reviewDetails.UserID %></p>
+    <p>Is it Dairy-Free? <%= reviewDetails.DairyFree === 'Y' ? 'Yes' : 'No' %></p>
+    <p>Is it Gluten-Free? <%= reviewDetails.GlutenFree === 'Y' ? 'Yes' : 'No' %></p>
 
 </body>
 </html>
+

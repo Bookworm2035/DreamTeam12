@@ -110,11 +110,18 @@ app.get("/database", (req, res) => {
    });
 });
 
+
+
 app.get("/reviewDetails/:reviewID", async (req, res) => {
    try {
       // Retrieve review details based on the reviewID from the URL parameter
       const reviewID = req.params.reviewID;
-      const reviewDetails = await knex("Review").where({ ReviewID: reviewID }).first();
+      const reviewDetails = await knex.select('ReviewID','RestName', 'StreetAddress', 'FirstName', 'DessertName', 'Description', 'Stars', 'Price', 'DairyFree', 'GlutenFree')
+      .from('Review')
+      .join('User as U', 'Review.UserID', '=','U.UserID')
+      .join('Restaurant as R', 'Review.RestaurantID', '=','R.RestaurantID')
+      .join('Dessert as D', 'Review.DessertID', '=','D.DessertID')
+      .where({ ReviewID: reviewID }).first();
 
       // Render the reviewDetails.ejs template with the retrieved details
       res.render("reviewDetails", { reviewDetails });
@@ -123,6 +130,7 @@ app.get("/reviewDetails/:reviewID", async (req, res) => {
       res.status(500).send('Error retrieving review details.');
    }
 });
+
 
 // Displaying database
 app.get("/indexDatabase", (req, res) => {
@@ -182,14 +190,14 @@ app.post("/editRow", (req, res)=> {
       Price: req.body.Price,
       UserID: req.body.UserID
    }).then(allReviews => {
-      res.redirect("/");
+      res.redirect("indexDatabase");
    })
 });
 
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
    knex("Review").where("ReviewID", req.params.id).del().then( allReviews => {
-      res.redirect("/");
+      res.redirect("indexDatabase");
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
@@ -237,7 +245,9 @@ app.post("/submitsurvey", async (req, res) => {
          
          userID = newUserID[0];
       }
-
+console.log(Email)
+console.log(Stars)
+console.log(DairyFree)
       await knex("Review").insert({
          DessertID: dessertID,
          RestaurantID: restaurantID,
