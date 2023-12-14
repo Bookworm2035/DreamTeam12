@@ -127,7 +127,7 @@
                 <td><%= allReviews[iCount].Stars %></td>
                 <td><%= allReviews[iCount].GlutenFree %></td>
                 <td><%= allReviews[iCount].DairyFree %></td>
-                <td><%= allReviews[iCount].Price %></td>
+                <td>$<%= parseFloat(allReviews[iCount].Price).toFixed(2) %></td>
                 <td><%= allReviews[iCount].UserID %></td>
                 <td><a href="/reviewDetails/<%= allReviews[iCount].ReviewID %>">View Details</a></td>
             </tr>
