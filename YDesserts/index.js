@@ -207,10 +207,12 @@ app.post("/deleteRow/:id", (req, res) => {
 //submiting the survey
 app.post("/submitsurvey", async (req, res) => {
    try {
-      let dessertID = await knex("Dessert")
+      let dessertIDObj = await knex("Dessert")
          .where({ DessertName: req.body.DessertName })
          .select("DessertID")
          .first();
+
+      let dessertID = dessertIDObj ? dessertIDObj.DessertID : null;
 
       if (!dessertID) {
          const newDessertId = await knex("Dessert")
@@ -222,13 +224,15 @@ app.post("/submitsurvey", async (req, res) => {
          dessertID = newDessertId[0];
       }
 
-      let restaurantID = await knex("Restaurant")
+      let restaurantIDObj = await knex("Restaurant")
          .where({
             RestName: req.body.RestName,
             StreetAddress: req.body.StreetAddress
          })
          .select("RestaurantID")
          .first();
+
+      let restaurantID = restaurantIDObj ? restaurantIDObj.RestaurantID : null;
 
       if (!restaurantID) {
          const newRestaurantID = await knex("Restaurant")
@@ -241,10 +245,12 @@ app.post("/submitsurvey", async (req, res) => {
          restaurantID = newRestaurantID[0];
       }
 
-      let userID = await knex("User")
+      let userIDObj = await knex("User")
          .where({ Email: req.body.Email })
          .select("UserID")
          .first();
+
+      let userID = userIDObj ? userIDObj.UserID : null;
 
       if (!userID) {
          const newUserID = await knex("User")
