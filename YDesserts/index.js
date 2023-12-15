@@ -237,7 +237,7 @@ app.post("/submitsurvey", async (req, res) => {
          .first();
 
       let restaurantID = restaurantIDObj ? restaurantIDObj.RestaurantID : null;
-
+//check for and create restaurante id if needed
       if (!restaurantID) {
          const newRestaurantID = await knex("Restaurant")
             .insert({
@@ -255,7 +255,7 @@ app.post("/submitsurvey", async (req, res) => {
          .first();
 
       let userID = userIDObj ? userIDObj.UserID : null;
-
+//check if user already exists
       if (!userID) {
          const newUserID = await knex("User")
             .insert({
@@ -267,7 +267,7 @@ app.post("/submitsurvey", async (req, res) => {
 
          userID = newUserID[0].UserID;
       }
-
+//add to review table
       await knex("Review").insert({
          DessertID: dessertID,
          RestaurantID: restaurantID,
