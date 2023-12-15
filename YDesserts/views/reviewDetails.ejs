@@ -32,21 +32,13 @@
             font-size: medium;
             margin: 5px 0;
         }
-
-        
+        button {
+            margin-top: 20px;
+            /* Add more styles for the button if needed */
+        }
     </style>
-
-<script type="text/javascript">
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
 </head>
 <body>
-
-    
-
     <div class="details-box">
         <h1>Review Details</h1>
         <p>Review ID: <%= reviewDetails.ReviewID %></p>
@@ -59,10 +51,13 @@
         <p>Price: $<%= reviewDetails.Price %></p>
         <p>Is it Dairy-Free? <%= reviewDetails.DairyFree === 'Y' ? 'Yes' : 'No' %></p>
         <p>Is it Gluten-Free? <%= reviewDetails.GlutenFree === 'Y' ? 'Yes' : 'No' %></p>
+        <button onclick="goBack()">Go Back</button>
     </div>
 
-    <br>
-    <button onclick="goBack()">Go Back</button>
-    
+    <script type="text/javascript">
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>
