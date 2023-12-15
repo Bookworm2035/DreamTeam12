@@ -197,7 +197,7 @@ app.post("/editRow", (req, res)=> {
 //deleting users (if logged in)
 app.post("/deleteRow/:id", (req, res) => {
    knex("Review").where("ReviewID", req.params.id).del().then( allReviews => {
-      res.redirect("indexDatabase");
+      res.redirect("/");
    }).catch( err => {
       console.log(err);
       res.status(500).json({err});
